@@ -16,13 +16,10 @@ mount -t sysfs sysfs /sys
 
 hostname blankon
 
-#. /etc/blankon/rkinit
 . /etc/blankon/init
 
 ENV=/etc/blankon/shinit
 export ENV
 
-#exec setsid -c /bin/sh
 uname -a
-boot /dev/mmcblk0p1
-#/bin/sh
+boot ${ROOT} 
