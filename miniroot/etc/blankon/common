@@ -102,7 +102,6 @@ boot()
 		;;
 	0)
 		unset root init
-		. /.env
 		;;
 	*)
 		echo usage: boot device:[/] [/sbin/init]
@@ -114,37 +113,4 @@ boot()
 	_boot
 }
 
-loadenv()
-{
-	dd if=/dev/block/mtd/by-name/misc bs=16384 skip=255 count=1 | gzip -d > /.env
-	if [ ! -s /.env ]; then
-		cat <<EOF > /.env
-#root=/dev/mmcblk0p1:/linuxroot
-#init=/sbin/init
-#ethaddr=00:11:22:33:44:55
-#fbset_args="-a -nonstd 1 -g 1920 1080 1920 1080 32 -rgba 8/0,8/8,8/16,8/24"
-#fbset_args="-a -nonstd 4 -g 1280 720 1280 720 16 -rgba 5/11,6/5,5/0,0/0"
-#autoboot=1
-EOF
-	fi
-}
 
-saveenv()
-{
-	gzip -9 < /.env | dd of=/dev/block/mtd/by-name/misc bs=16384 conv=sync,fsync seek=255 count=1
-}
-
-eraseenv()
-{
-	dd if=/dev/zero of=/dev/block/mtd/by-name/misc bs=16384 conv=sync,fsync seek=255 count=1
-}
-
-editenv()
-{
-	vi /.env
-}
-
-showenv()
-{
-	cat /.env
-}

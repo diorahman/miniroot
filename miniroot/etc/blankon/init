@@ -1,7 +1,9 @@
 . /etc/blankon/common
 
-loadenv
-. /.env
+ROOT=/dev/mmcblk0p1
+if [ -f /etc/blankon/env ];then
+  . /etc/blankon/env
+fi
 
 if [ -z "${ethaddr}" ]; then
 	wait=5
@@ -24,4 +26,4 @@ if [ "${autoboot}" = "1" ]; then
 	_boot
 fi
 
-boot /dev/mmcblk0p1
+boot ${ROOT} 
