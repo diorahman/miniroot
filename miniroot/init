@@ -22,4 +22,4 @@ ENV=/etc/blankon/shinit
 export ENV
 
 uname -a
-boot ${ROOT} 
+/bin/busybox sh
