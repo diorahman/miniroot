@@ -1,0 +1,2 @@
+ARCH=armhf
+REPO=http://ftp.us.debian.org/debian/pool
